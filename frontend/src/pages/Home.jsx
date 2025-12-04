@@ -11,10 +11,12 @@ import { SiYoutubeshorts } from "react-icons/si";
 import { MdOutlineSubscriptions } from "react-icons/md";
 import { GoVideo } from "react-icons/go";
 import { IoIosAddCircle } from "react-icons/io";
+import { Outlet, useNavigate } from "react-router-dom";
 const Home = () => {
   const [sidebarOpen, setSlidebarOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState("Home");
   const [active, setActive] = useState("Home");
+  const navigate = useNavigate();
   const categories = [
     "Music",
     "Gaming",
@@ -48,14 +50,20 @@ const Home = () => {
             text={"Home"}
             open={sidebarOpen}
             selected={selectedItem === "Home"}
-            onClick={() => setSelectedItem("Home")}
+            onClick={() => {
+              setSelectedItem("Home");
+              navigate("/");
+            }}
           />
           <SlidebarItem
             icon={<SiYoutubeshorts />}
             text={"Shorts"}
             open={sidebarOpen}
             selected={selectedItem === "Shorts"}
-            onClick={() => setSelectedItem("Shorts")}
+            onClick={() => {
+              setSelectedItem("Shorts");
+              navigate("/Shorts");
+            }}
           />
           <SlidebarItem
             icon={<MdOutlineSubscriptions />}
@@ -123,6 +131,9 @@ const Home = () => {
         </div>
 
         {/* CSS for Webkit */}
+        <div className="mt-4">
+          <Outlet></Outlet>
+        </div>
       </main>
       {/* bottom nav */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[#0f0f0f] border-t border-gray-800 flex justify-around py-2 z-10">
