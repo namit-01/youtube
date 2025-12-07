@@ -1,4 +1,4 @@
-import { createSlice } from "reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 const UserSlice = createSlice({
   name: "user",
   initialValue: { userData: null },
