@@ -11,7 +11,7 @@ export default function App() {
   const [tokenExists, setTokenExists] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(async () => {
+  useEffect(() => {
     const token = document.cookie
       .split("; ")
       .find((row) => row.startsWith("token="))
@@ -19,7 +19,7 @@ export default function App() {
 
     if (token) {
       setTokenExists(true);
-      await GetUser(); // fetch user data
+      GetUser(); // fetch user data
       navigate("/"); // redirect to home immediately
     }
   }, []);
