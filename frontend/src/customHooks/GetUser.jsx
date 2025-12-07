@@ -1,27 +1,41 @@
 import axios from "axios";
-import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../Redux/UserSlice";
 
 const GetUser = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    try {
-      const fetchUser = async () => {
+    // Check if token exists in cookies
+    const tokenExists = document.cookie
+      .split(";")
+      .some((c) => c.trim().startsWith("token="));
+    if (!tokenExists) {
+      setLoading(false);
+      return; // Exit early if no token
+    }
+
+    const fetchUser = async () => {
+      try {
         const result = await axios.get(`${API_URL}/api/user/getUser`, {
           withCredentials: true,
         });
         dispatch(setUserData(result.data.user));
         console.log("User data fetched:", result.data.user);
-      };
-      fetchUser();
-    } catch (err) {
-      console.log(err);
-    }
+      } catch (err) {
+        console.log("Error fetching user:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
   }, []);
+
+  return loading;
 };
 
 export default GetUser;
