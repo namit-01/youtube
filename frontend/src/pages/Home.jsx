@@ -11,12 +11,14 @@ import { SiYoutubeshorts } from "react-icons/si";
 import { MdOutlineSubscriptions } from "react-icons/md";
 import { GoVideo } from "react-icons/go";
 import { IoIosAddCircle } from "react-icons/io";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 const Home = () => {
   const [sidebarOpen, setSlidebarOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState("Home");
   const [active, setActive] = useState("Home");
   const navigate = useNavigate();
+  const location = useLocation();
+
   const categories = [
     "Music",
     "Gaming",
@@ -38,6 +40,7 @@ const Home = () => {
   ];
   return (
     <div className="bg-[#0f0f0f] text-white min-h-screen relative">
+      <Navbar setSlidebarOpen={setSlidebarOpen} />
       <aside
         className={`bg-[#0f0f0f] border-r border-gray-800 transition-all duration-300 fixed top-[60px] bottom-0 z-40
           ${
@@ -119,16 +122,20 @@ const Home = () => {
         {/*Categories */}
 
         {/* Categories */}
-        <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide-black pt-2 mt-[60px]">
-          {categories.map((cat, idx) => (
-            <button
-              key={idx}
-              className="whitespace-nowrap bg-[#272727] px-4 py-1 rounded-lg text-sm hover:bg-gray-700"
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {location.pathname === "/" && (
+          <>
+            <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide-black pt-2 mt-[60px]">
+              {categories.map((cat, idx) => (
+                <button
+                  key={idx}
+                  className="whitespace-nowrap bg-[#272727] px-4 py-1 rounded-lg text-sm hover:bg-gray-700"
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
 
         {/* CSS for Webkit */}
         <div className="mt-4">
@@ -170,7 +177,6 @@ const Home = () => {
           onClick={() => setActive("Profile")}
         />
       </nav>
-      <Navbar setSlidebarOpen={setSlidebarOpen} />
     </div>
   );
 };

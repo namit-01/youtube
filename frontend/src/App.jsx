@@ -5,8 +5,10 @@ import SignIn from "./pages/SignIn";
 import { AlertProvider } from "./context/AlertContext";
 import Navbar from "./components/navbar";
 import Shorts from "./pages/shorts/Shorts";
+import GetUser from "./customHooks/GetUser";
 
 export default function App() {
+  GetUser();
   return (
     <AlertProvider>
       <Routes>
