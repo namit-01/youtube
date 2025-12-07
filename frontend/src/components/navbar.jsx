@@ -1,7 +1,9 @@
 import React from "react";
 import { FaBars, FaMicrophone, FaSearch, FaUserCircle } from "react-icons/fa";
 import logo from "../assests/youtube.png";
+import { useSelector } from "react-redux";
 const Navbar = ({ setSlidebarOpen }) => {
+  const { userData, subscribeChannel } = useSelector((state) => state.user);
   return (
     <header className="bg-[#0f0f0f] h-16 p-3 border-b border-gray-800 fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center justify-between">
@@ -36,11 +38,23 @@ const Navbar = ({ setSlidebarOpen }) => {
         </div>
         {/* right */}
         <div className="flex items-center gap-3">
-          <button className="hidden md:flex items-center gap-1 bg-[#272727] px-3 py-1 rounded-full cursor-pointer">
-            <span className="text-lg">+</span>
-            <span>create</span>
-          </button>
-          <FaUserCircle className=" text-3xl hidden md:flex text-gray-400" />
+          {userData && userData.channel && (
+            <button className="hidden md:flex items-center gap-1 bg-[#272727] px-3 py-1 rounded-full cursor-pointer">
+              <span className="text-lg">+</span>
+              <span>create</span>
+            </button>
+          )}
+          {/* userData && userData.photoUrl ? (<img src={userData.photoUrl} className="w-9 h-9 rounded-full object-cover border-1 border-gray-700 hidden md:flex">):()*/}
+          {userData && userData.photoUrl ? (
+            <img
+              src={userData.photoUrl}
+              alt="img"
+              className="w-9 h-9 rounded-full object-cover border-1 border-gray-700 hidden md:flex"
+            />
+          ) : (
+            <FaUserCircle className="text-3xl hidden md:flex text-gray-400" />
+          )}
+
           <FaSearch className="text-lg md:hidden flex"></FaSearch>
         </div>
       </div>

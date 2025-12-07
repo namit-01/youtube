@@ -10,13 +10,6 @@ const GetUser = () => {
 
   useEffect(() => {
     // Check if token exists in cookies
-    const tokenExists = document.cookie
-      .split(";")
-      .some((c) => c.trim().startsWith("token="));
-    if (!tokenExists) {
-      setLoading(false);
-      return; // Exit early if no token
-    }
 
     const fetchUser = async () => {
       try {

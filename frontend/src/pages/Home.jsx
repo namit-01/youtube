@@ -12,11 +12,14 @@ import { MdOutlineSubscriptions } from "react-icons/md";
 import { GoVideo } from "react-icons/go";
 import { IoIosAddCircle } from "react-icons/io";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Home = () => {
+  const { userData, subscribeChannel } = useSelector((state) => state.user);
   const [sidebarOpen, setSlidebarOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState("Home");
   const [active, setActive] = useState("Home");
   const navigate = useNavigate();
+
   const location = useLocation();
 
   const categories = [
@@ -171,7 +174,16 @@ const Home = () => {
           onClick={() => setActive("Subscriptions")}
         />
         <MobileNavItem
-          icon={<FaUserCircle />}
+          icon={
+            userData && userData.photoUrl ? (
+              <img
+                className="w-9 h-9 rounded-full object-cover border-1 border-gray-700 "
+                src={userData.photoUrl}
+              ></img>
+            ) : (
+              <FaUserCircle />
+            )
+          }
           text={"You"}
           active={active == "Profile"}
           onClick={() => setActive("Profile")}
