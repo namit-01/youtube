@@ -15,6 +15,7 @@ const GetUser = () => {
           withCredentials: true,
         });
         dispatch(setUserData(result.data.user));
+        console.log("User data fetched:", result.data.user);
       };
       fetchUser();
     } catch (err) {
