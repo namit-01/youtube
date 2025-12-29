@@ -31,7 +31,7 @@ const GetUser = () => {
     };
 
     fetchUser();
-  }, [dispatch, API_URL]);
+  });
 };
 
 export default GetUser;
