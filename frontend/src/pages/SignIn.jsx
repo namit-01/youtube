@@ -35,6 +35,7 @@ export default function SignIn() {
           withCredentials: true,
         }
       );
+      localStorage.setItem("token", result.data.token);
       setLoading(false);
       showMessage(result.data.message);
       navigate("/");
