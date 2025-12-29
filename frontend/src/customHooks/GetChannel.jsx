@@ -23,7 +23,7 @@ const GetChannel = () => {
     };
 
     fetchChannel();
-  });
+  }, []);
 };
 
 export default GetChannel;

@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../Redux/UserSlice";
 
 const GetUser = () => {
   const dispatch = useDispatch();
   const API_URL = import.meta.env.VITE_API_URL;
-
+  const channelData = useSelector((state) => state.channel);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -31,7 +31,7 @@ const GetUser = () => {
     };
 
     fetchUser();
-  });
+  }, [channelData]);
 };
 
 export default GetUser;
