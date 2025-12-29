@@ -13,11 +13,13 @@ import { GoVideo } from "react-icons/go";
 import { IoIosAddCircle } from "react-icons/io";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Profile from "../components/Profile";
 const Home = () => {
   const { userData, subscribeChannel } = useSelector((state) => state.user);
   const [sidebarOpen, setSlidebarOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState("Home");
   const [active, setActive] = useState("Home");
+  const [popUp, setPopUp] = useState(false);
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -43,7 +45,7 @@ const Home = () => {
   ];
   return (
     <div className="bg-[#0f0f0f] text-white min-h-screen relative">
-      <Navbar setSlidebarOpen={setSlidebarOpen} />
+      <Navbar setSlidebarOpen={setSlidebarOpen} setPopUp={setPopUp} />
       <aside
         className={`bg-[#0f0f0f] border-r border-gray-800 transition-all duration-300 fixed top-[60px] bottom-0 z-40
           ${
@@ -76,7 +78,10 @@ const Home = () => {
             text={"Subscriptions"}
             open={sidebarOpen}
             selected={selectedItem === "Subscriptions"}
-            onClick={() => setSelectedItem("Subscription")}
+            onClick={() => {
+              setSelectedItem("Subscription");
+              navigate("/createChannel");
+            }}
           />
         </nav>
         <hr className="border-gray-800 my-3"></hr>
@@ -139,8 +144,8 @@ const Home = () => {
             </div>
           </>
         )}
-
-        {/* CSS for Webkit */}
+        {popUp && <Profile />}
+        {/* CSS for Webkit  the profile part should be there above this for the better navigation unb the youttube clone  of thre the app which we are making */}
         <div className="mt-4">
           <Outlet></Outlet>
         </div>
@@ -151,7 +156,10 @@ const Home = () => {
           icon={<FaHome></FaHome>}
           text={"Home"}
           active={active == "Home"}
-          onClick={() => setActive("Home")}
+          onClick={() => {
+            setActive("Home");
+            navigate("/");
+          }}
         />
         <MobileNavItem
           icon={<SiYoutubeshorts />}
@@ -186,7 +194,10 @@ const Home = () => {
           }
           text={"You"}
           active={active == "Profile"}
-          onClick={() => setActive("Profile")}
+          onClick={() => {
+            setActive("Profile");
+            navigate("/mobilepro");
+          }}
         />
       </nav>
     </div>

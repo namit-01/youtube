@@ -2,14 +2,14 @@ import React from "react";
 import { FaBars, FaMicrophone, FaSearch, FaUserCircle } from "react-icons/fa";
 import logo from "../assests/youtube.png";
 import { useSelector } from "react-redux";
-const Navbar = ({ setSlidebarOpen }) => {
+const Navbar = ({ setSlidebarOpen, setPopUp }) => {
   const { userData, subscribeChannel } = useSelector((state) => state.user);
   return (
     <header className="bg-[#0f0f0f] h-16 p-3 border-b border-gray-800 fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button
-            className="text-xl bg-[#272727] p-2 rounded-full md:inline hidden"
+            className="text-xl bg-[#272727]Q p-2 rounded-full md:inline hidden"
             onClick={() => setSlidebarOpen((p) => !p)}
           >
             <FaBars></FaBars>
@@ -47,6 +47,7 @@ const Navbar = ({ setSlidebarOpen }) => {
           {/* userData && userData.photoUrl ? (<img src={userData.photoUrl} className="w-9 h-9 rounded-full object-cover border-1 border-gray-700 hidden md:flex">):()*/}
           {userData && userData.photoUrl ? (
             <img
+              onClick={() => setPopUp((prev) => !prev)}
               src={userData.photoUrl}
               alt="img"
               className="w-9 h-9 rounded-full object-cover border-1 border-gray-700 hidden md:flex"

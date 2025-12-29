@@ -89,7 +89,16 @@ export default function SignIn() {
             Show Password
           </label>
         </div>
-
+        <div className="flex justify-end mt-3">
+          <button
+            className="text-sm text-orange-400 hover:text-blue-500"
+            onClick={() => {
+              navigate("/forgetpassword");
+            }}
+          >
+            Forgot password?
+          </button>
+        </div>
         <div className="flex justify-end mt-8">
           <Button Text="Sign In" disabled={loading} onClick={handleSignIn} />
         </div>
