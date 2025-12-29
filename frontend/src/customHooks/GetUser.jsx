@@ -13,8 +13,11 @@ const GetUser = () => {
 
     const fetchUser = async () => {
       try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+
         const result = await axios.get(`${API_URL}/api/user/getUser`, {
-          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` },
         });
         dispatch(setUserData(result.data.user));
         console.log("User data fetched:", result.data.user);
@@ -26,7 +29,7 @@ const GetUser = () => {
     };
 
     fetchUser();
-  }, []);
+  });
 
   return loading;
 };

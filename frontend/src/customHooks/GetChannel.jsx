@@ -26,7 +26,7 @@ const GetChannel = () => {
     };
 
     fetchChannel();
-  }, [setChannelData]);
+  });
 
   if (loading) return <p>Loading...</p>;
 
